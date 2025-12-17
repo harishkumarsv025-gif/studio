@@ -17,25 +17,25 @@ import { Scale } from 'lucide-react';
 
 const insurers = [
   {
-    name: 'Provider A',
+    name: 'GramSuraksha',
     policy: 'HealthGuard',
-    premium: '₹400 / month',
+    premium: '₹150 / month',
     coverage: 'Basic health, hospitalization',
-    deductible: '₹5000',
+    deductible: '₹2,500',
   },
   {
-    name: 'Provider B',
-    policy: 'CropSecure',
-    premium: '₹800 / acre',
+    name: 'AgriSecure',
+    policy: 'Fasal Bima',
+    premium: '₹300 / acre',
     coverage: 'Crop failure (drought/flood)',
-    deductible: '10% of loss',
+    deductible: '15% of loss',
   },
   {
-    name: 'Provider C',
-    policy: 'HomeSafe',
-    premium: '₹250 / month',
-    coverage: 'Home structure damage',
-    deductible: '₹10000',
+    name: 'Janata Shield',
+    policy: 'HomeProtect',
+    premium: '₹100 / month',
+    coverage: 'Home structure damage (fire/natural calamity)',
+    deductible: '₹5,000',
   },
 ];
 

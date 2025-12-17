@@ -104,7 +104,7 @@ export function PolicyAdvisor() {
                 name="monthlyIncome"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Monthly Income (₹)</FormLabel>
+                    <FormLabel>Monthly Income (INR)</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g., 15000" {...field} />
                     </FormControl>
@@ -117,7 +117,7 @@ export function PolicyAdvisor() {
                 name="assetsValue"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Assets Value (₹)</FormLabel>
+                    <FormLabel>Assets Value (INR)</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g., 50000" {...field} />
                     </FormControl>

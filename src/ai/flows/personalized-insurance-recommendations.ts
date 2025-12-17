@@ -16,7 +16,7 @@ const RecommendationSchema = z.object({
     policyName: z.string().describe('A suitable, catchy name for the recommended insurance policy, e.g., "HealthGuard Basic" or "CropSure Starter".'),
     provider: z.string().describe('The name of the insurance provider, e.g., "Community Insure", "AgriProtect".'),
     monthlyPremium: z.number().describe('The estimated monthly premium for the policy in INR.'),
-    deductible: z.string().describe('The deductible for the policy, formatted as a currency string (e.g., "₹500") or a percentage (e.g., "10% of loss").'),
+    deductible: z.string().describe('The deductible for the policy, formatted as a currency string (e.g., "₹2,500") or a percentage (e.g., "10% of loss").'),
     coverageDetails: z.string().describe('A brief, clear summary of what the policy covers.'),
     suitabilityScore: z.number().min(1).max(10).describe('A score from 1 to 10 indicating how suitable this policy is for the user, with 10 being most suitable.'),
     reasoning: z.string().describe('A short, encouraging sentence explaining why this policy is a good fit for the user\'s situation.'),
