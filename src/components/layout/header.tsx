@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 
 export function Header() {
   const navLinks = [
-    { href: '#calculator', label: 'Calculator' },
-    { href: '#advisor', label: 'AI Advisor' },
-    { href: '#compare', label: 'Compare' },
-    { href: '#support', label: 'Support' },
+    { href: '/#calculator', label: 'Calculator' },
+    { href: '/#advisor', label: 'AI Advisor' },
+    { href: '/#compare', label: 'Compare' },
+    { href: '/#support', label: 'Support' },
   ];
 
   return (
@@ -17,7 +17,7 @@ export function Header() {
           <Landmark className="h-6 w-6 text-primary" />
           <span className="font-bold font-headline">MicroInsurance Ally</span>
         </Link>
-        <nav className="flex items-center gap-4 text-sm lg:gap-6">
+        <nav className="hidden md:flex items-center gap-4 text-sm lg:gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}

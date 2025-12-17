@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/table';
 import { Scale } from 'lucide-react';
 import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
 const insurers = [
   {
@@ -24,7 +26,6 @@ const insurers = [
     policy: 'Aam Aadmi Bima Yojana',
     premium: '₹100 / year',
     coverage: 'Natural/Accidental death & disability',
-    deductible: 'N/A',
     bestFor: 'Life & Accident',
   },
   {
@@ -33,7 +34,6 @@ const insurers = [
     policy: 'Crop Insurance (PMFBY)',
     premium: 'As per crop & season',
     coverage: 'Crop yield loss due to non-preventable risks',
-    deductible: 'Varies',
     bestFor: 'Agriculture',
   },
   {
@@ -42,7 +42,6 @@ const insurers = [
     policy: 'Health Advantage Plus',
     premium: '₹200 / month',
     coverage: 'Hospitalization expenses',
-    deductible: '₹5,000',
     bestFor: 'Health',
   },
 ];
@@ -53,10 +52,10 @@ export function InsurerComparison() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl">
           <Scale className="h-6 w-6 text-primary" />
-          Compare Micro-Insurance Providers
+          Compare & Apply for Insurance
         </CardTitle>
         <CardDescription>
-          A quick overview of products from real insurance providers. For personalized advice, use our AI Advisor.
+          Find the right policy and apply directly through our platform.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -69,6 +68,7 @@ export function InsurerComparison() {
                 <TableHead className="font-semibold text-center">Typical Premium</TableHead>
                 <TableHead className="font-semibold">Key Coverage</TableHead>
                 <TableHead className="font-semibold text-center">Best For</TableHead>
+                <TableHead className="font-semibold text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -91,6 +91,13 @@ export function InsurerComparison() {
                   <TableCell>{insurer.coverage}</TableCell>
                   <TableCell className="text-center">
                     <Badge variant="secondary">{insurer.bestFor}</Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button asChild size="sm" className='bg-primary hover:bg-primary/90'>
+                      <Link href={`/apply?insurer=${encodeURIComponent(insurer.name)}&policy=${encodeURIComponent(insurer.policy)}`}>
+                        Apply Now
+                      </Link>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
