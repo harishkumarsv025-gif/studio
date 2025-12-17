@@ -25,17 +25,17 @@ export default function Home() {
           <Header />
           <main className="flex-grow">
             <Hero />
-            <div className="container mx-auto px-4 py-12 md:py-16 space-y-16 md:space-y-24">
-              <section id="calculator">
+            <div className="container mx-auto px-4 py-12 md:py-16 space-y-20 md:space-y-28">
+              <section id="calculator" className="scroll-mt-20">
                 <InsuranceCalculator />
               </section>
-              <section id="advisor">
+              <section id="advisor" className="scroll-mt-20">
                 <PolicyAdvisor />
               </section>
-              <section id="compare">
+              <section id="compare" className="scroll-mt-20">
                 <InsurerComparison />
               </section>
-              <section id="support">
+              <section id="support" className="scroll-mt-20">
                 <Support />
               </section>
             </div>
