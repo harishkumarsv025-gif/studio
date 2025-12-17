@@ -47,9 +47,9 @@ export function PolicyAdvisor() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      householdSize: 2,
-      monthlyIncome: 300,
-      assetsValue: 1000,
+      householdSize: 4,
+      monthlyIncome: 15000,
+      assetsValue: 50000,
       coverageType: 'Health',
     },
   });
@@ -104,9 +104,9 @@ export function PolicyAdvisor() {
                 name="monthlyIncome"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Monthly Income ($)</FormLabel>
+                    <FormLabel>Monthly Income (₹)</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 300" {...field} />
+                      <Input type="number" placeholder="e.g., 15000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -117,9 +117,9 @@ export function PolicyAdvisor() {
                 name="assetsValue"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Assets Value ($)</FormLabel>
+                    <FormLabel>Assets Value (₹)</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 1000" {...field} />
+                      <Input type="number" placeholder="e.g., 50000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -182,7 +182,7 @@ export function PolicyAdvisor() {
                     <CardContent className="flex-grow space-y-3">
                       <div className="flex justify-between items-baseline">
                         <span className="text-muted-foreground">Monthly Premium</span>
-                        <span className="font-bold text-primary">${rec.monthlyPremium}</span>
+                        <span className="font-bold text-primary">₹{rec.monthlyPremium}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Deductible</span>

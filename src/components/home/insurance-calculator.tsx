@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/select';
 
 export function InsuranceCalculator() {
-  const [coverageAmount, setCoverageAmount] = useState(10000);
+  const [coverageAmount, setCoverageAmount] = useState(50000);
   const [riskFactor, setRiskFactor] = useState(5);
   const [policyType, setPolicyType] = useState('health');
   const [monthlyPremium, setMonthlyPremium] = useState<string | null>(null);
@@ -67,11 +67,11 @@ export function InsuranceCalculator() {
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="amount">Coverage Amount: ${coverageAmount.toLocaleString()}</Label>
+            <Label htmlFor="amount">Coverage Amount: ₹{coverageAmount.toLocaleString('en-IN')}</Label>
             <Slider
               id="amount"
-              min={1000}
-              max={100000}
+              min={10000}
+              max={500000}
               step={1000}
               value={[coverageAmount]}
               onValueChange={(value) => setCoverageAmount(value[0])}
@@ -100,7 +100,7 @@ export function InsuranceCalculator() {
         {monthlyPremium && (
           <div className="text-xl font-bold font-headline text-primary-dark">
             Estimated Monthly Premium:{' '}
-            <span className="text-2xl text-primary">${monthlyPremium}</span>
+            <span className="text-2xl text-primary">₹{monthlyPremium}</span>
           </div>
         )}
       </CardFooter>

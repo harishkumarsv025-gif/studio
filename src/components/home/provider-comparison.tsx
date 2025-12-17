@@ -19,23 +19,23 @@ const insurers = [
   {
     name: 'Provider A',
     policy: 'HealthGuard',
-    premium: '$15 / month',
+    premium: '₹400 / month',
     coverage: 'Basic health, hospitalization',
-    deductible: '$50',
+    deductible: '₹5000',
   },
   {
     name: 'Provider B',
     policy: 'CropSecure',
-    premium: '$10 / acre',
+    premium: '₹800 / acre',
     coverage: 'Crop failure (drought/flood)',
     deductible: '10% of loss',
   },
   {
     name: 'Provider C',
     policy: 'HomeSafe',
-    premium: '$8 / month',
+    premium: '₹250 / month',
     coverage: 'Home structure damage',
-    deductible: '$100',
+    deductible: '₹10000',
   },
 ];
 
