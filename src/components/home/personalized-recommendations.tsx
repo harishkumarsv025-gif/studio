@@ -20,6 +20,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -29,6 +30,7 @@ import { type PersonalizedInsuranceRecommendationsOutput } from '@/ai/flows/pers
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '../ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import Link from 'next/link';
 
 const formSchema = z.object({
   householdSize: z.coerce.number().min(1, 'Household must have at least 1 member.'),
@@ -198,6 +200,13 @@ export function PolicyAdvisor() {
                         &quot;{rec.reasoning}&quot;
                       </p>
                     </CardContent>
+                     <CardFooter>
+                        <Button asChild className="w-full mt-4 bg-primary hover:bg-primary/90">
+                            <Link href={`/apply?insurer=${encodeURIComponent(rec.provider)}&policy=${encodeURIComponent(rec.policyName)}`}>
+                                Apply Now
+                            </Link>
+                        </Button>
+                    </CardFooter>
                   </Card>
                 ))}
               </div>
