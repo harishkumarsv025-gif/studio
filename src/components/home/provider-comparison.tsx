@@ -82,6 +82,7 @@ export function InsurerComparison() {
                         width={80}
                         height={32}
                         className="object-contain"
+                        unoptimized
                       />
                     </div>
                   </TableCell>
