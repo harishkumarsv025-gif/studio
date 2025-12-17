@@ -1,8 +1,8 @@
 import { Header } from '@/components/layout/header';
 import { Hero } from '@/components/home/hero';
-import { LoanCalculator } from '@/components/home/loan-calculator';
-import { ProviderComparison } from '@/components/home/provider-comparison';
-import { PersonalizedRecommendations } from '@/components/home/personalized-recommendations';
+import { InsuranceCalculator } from '@/components/home/insurance-calculator';
+import { InsurerComparison } from '@/components/home/provider-comparison';
+import { PolicyAdvisor } from '@/components/home/personalized-recommendations';
 import { Support } from '@/components/home/support';
 import { CookieBanner } from '@/components/layout/cookie-banner';
 
@@ -14,13 +14,13 @@ export default function Home() {
         <Hero />
         <div className="container mx-auto px-4 py-12 md:py-16 space-y-16 md:space-y-24">
           <section id="calculator">
-            <LoanCalculator />
+            <InsuranceCalculator />
           </section>
           <section id="advisor">
-            <PersonalizedRecommendations />
+            <PolicyAdvisor />
           </section>
           <section id="compare">
-            <ProviderComparison />
+            <InsurerComparison />
           </section>
           <section id="support">
             <Support />

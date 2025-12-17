@@ -25,31 +25,32 @@ import {
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Sparkles, Wand2 } from 'lucide-react';
-import { type PersonalizedLoanRecommendationsOutput } from '@/ai/flows/personalized-loan-recommendations';
+import { type PersonalizedInsuranceRecommendationsOutput } from '@/ai/flows/personalized-insurance-recommendations';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '../ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const formSchema = z.object({
-  income: z.coerce.number().min(0, 'Income must be a positive number.'),
-  creditScore: z.coerce.number().min(300, 'Credit score must be at least 300.').max(850, 'Credit score must be at most 850.'),
-  loanPurpose: z.string().min(3, 'Please specify a loan purpose.'),
-  loanAmount: z.coerce.number().min(100, 'Loan amount must be at least $100.'),
+  householdSize: z.coerce.number().min(1, 'Household must have at least 1 member.'),
+  monthlyIncome: z.coerce.number().min(0, 'Income must be a positive number.'),
+  assetsValue: z.coerce.number().min(0, 'Assets value must be a positive number.'),
+  coverageType: z.string().min(1, 'Please select a coverage type.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-export function PersonalizedRecommendations() {
+export function PolicyAdvisor() {
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<PersonalizedLoanRecommendationsOutput | null>(null);
+  const [result, setResult] = useState<PersonalizedInsuranceRecommendationsOutput | null>(null);
   const { toast } = useToast();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      income: 500,
-      creditScore: 580,
-      loanPurpose: 'Business startup',
-      loanAmount: 1000,
+      householdSize: 2,
+      monthlyIncome: 300,
+      assetsValue: 1000,
+      coverageType: 'Health',
     },
   });
 
@@ -75,10 +76,10 @@ export function PersonalizedRecommendations() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl">
           <Wand2 className="h-6 w-6 text-primary" />
-          AI-Powered Loan Advisor
+          AI-Powered Policy Advisor
         </CardTitle>
         <CardDescription>
-          Fill in your details to receive personalized loan recommendations from our AI.
+          Fill in your details to receive personalized insurance recommendations from our AI.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -87,12 +88,25 @@ export function PersonalizedRecommendations() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <FormField
                 control={form.control}
-                name="income"
+                name="householdSize"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Household Size</FormLabel>
+                    <FormControl>
+                      <Input type="number" placeholder="e.g., 4" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="monthlyIncome"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Monthly Income ($)</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 500" {...field} />
+                      <Input type="number" placeholder="e.g., 300" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,23 +114,10 @@ export function PersonalizedRecommendations() {
               />
               <FormField
                 control={form.control}
-                name="creditScore"
+                name="assetsValue"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Credit Score</FormLabel>
-                    <FormControl>
-                      <Input type="number" placeholder="300-850" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="loanAmount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Loan Amount ($)</FormLabel>
+                    <FormLabel>Assets Value ($)</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g., 1000" {...field} />
                     </FormControl>
@@ -126,13 +127,23 @@ export function PersonalizedRecommendations() {
               />
               <FormField
                 control={form.control}
-                name="loanPurpose"
+                name="coverageType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Loan Purpose</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., Business startup" {...field} />
-                    </FormControl>
+                    <FormLabel>Desired Coverage</FormLabel>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select coverage type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Health">Health</SelectItem>
+                          <SelectItem value="Crop">Crop</SelectItem>
+                          <SelectItem value="Livestock">Livestock</SelectItem>
+                          <SelectItem value="Property">Property</SelectItem>
+                        </SelectContent>
+                      </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -153,7 +164,7 @@ export function PersonalizedRecommendations() {
 
         {loading && (
           <div className="mt-8 text-center text-muted-foreground">
-            <p>Our AI is analyzing your profile to find the best options...</p>
+            <p>Our AI is analyzing your profile to find the best policies for you...</p>
           </div>
         )}
 
@@ -165,22 +176,21 @@ export function PersonalizedRecommendations() {
                 {result.recommendations.map((rec, index) => (
                   <Card key={index} className="flex flex-col">
                     <CardHeader>
-                      <CardTitle className="text-lg">{rec.loanProduct}</CardTitle>
+                      <CardTitle className="text-lg">{rec.policyName}</CardTitle>
                       <CardDescription>{rec.provider}</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-3">
                       <div className="flex justify-between items-baseline">
-                        <span className="text-muted-foreground">Interest Rate</span>
-                        <span className="font-bold text-primary">{rec.interestRate}%</span>
+                        <span className="text-muted-foreground">Monthly Premium</span>
+                        <span className="font-bold text-primary">${rec.monthlyPremium}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Max Term</span>
-                        <span className="font-semibold">{rec.maxTerm}</span>
+                        <span className="text-muted-foreground">Deductible</span>
+                        <span className="font-semibold">{rec.deductible}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Processing Fee</span>
-                        <span className="font-semibold">{rec.processingFee}</span>
-                      </div>
+                       <p className="text-sm pt-2">
+                        <span className='font-semibold'>Coverage: </span>{rec.coverageDetails}
+                      </p>
                       <Badge variant="secondary">
                         Suitability: {rec.suitabilityScore}/10
                       </Badge>

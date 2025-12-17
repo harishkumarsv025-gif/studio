@@ -15,40 +15,40 @@ import {
 } from '@/components/ui/table';
 import { Scale } from 'lucide-react';
 
-const providers = [
+const insurers = [
   {
     name: 'Provider A',
-    product: 'MicroStart',
-    interestRate: '4.5%',
-    maxTerm: '12 Months',
-    processingFee: '$10',
+    policy: 'HealthGuard',
+    premium: '$15 / month',
+    coverage: 'Basic health, hospitalization',
+    deductible: '$50',
   },
   {
     name: 'Provider B',
-    product: 'QuickLoan',
-    interestRate: '5.2%',
-    maxTerm: '24 Months',
-    processingFee: 'Free',
+    policy: 'CropSecure',
+    premium: '$10 / acre',
+    coverage: 'Crop failure (drought/flood)',
+    deductible: '10% of loss',
   },
   {
     name: 'Provider C',
-    product: 'ExpressCredit',
-    interestRate: '6.0%',
-    maxTerm: '18 Months',
-    processingFee: '$5',
+    policy: 'HomeSafe',
+    premium: '$8 / month',
+    coverage: 'Home structure damage',
+    deductible: '$100',
   },
 ];
 
-export function ProviderComparison() {
+export function InsurerComparison() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl">
           <Scale className="h-6 w-6 text-primary" />
-          Compare Microfinance Providers
+          Compare Micro-Insurance Providers
         </CardTitle>
         <CardDescription>
-          A quick overview of available loan products. For personalized advice, use our AI Advisor.
+          A quick overview of available insurance products. For personalized advice, use our AI Advisor.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -57,20 +57,20 @@ export function ProviderComparison() {
             <TableHeader>
               <TableRow>
                 <TableHead className="font-semibold">Provider</TableHead>
-                <TableHead className="font-semibold">Loan Product</TableHead>
-                <TableHead className="font-semibold text-center">Interest Rate</TableHead>
-                <TableHead className="font-semibold text-center">Max Term</TableHead>
-                <TableHead className="font-semibold text-center">Processing Fee</TableHead>
+                <TableHead className="font-semibold">Policy Name</TableHead>
+                <TableHead className="font-semibold text-center">Typical Premium</TableHead>
+                <TableHead className="font-semibold">Key Coverage</TableHead>
+                <TableHead className="font-semibold text-center">Deductible</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {providers.map((provider) => (
-                <TableRow key={provider.name}>
-                  <TableCell className="font-medium">{provider.name}</TableCell>
-                  <TableCell>{provider.product}</TableCell>
-                  <TableCell className="text-center">{provider.interestRate}</TableCell>
-                  <TableCell className="text-center">{provider.maxTerm}</TableCell>
-                  <TableCell className="text-center">{provider.processingFee}</TableCell>
+              {insurers.map((insurer) => (
+                <TableRow key={insurer.name}>
+                  <TableCell className="font-medium">{insurer.name}</TableCell>
+                  <TableCell>{insurer.policy}</TableCell>
+                  <TableCell className="text-center">{insurer.premium}</TableCell>
+                  <TableCell>{insurer.coverage}</TableCell>
+                  <TableCell className="text-center">{insurer.deductible}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
