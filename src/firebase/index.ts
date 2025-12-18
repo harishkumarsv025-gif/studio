@@ -39,7 +39,7 @@ import { type UserProfile } from './types';
 // Initialization
 // ---
 
-export function initializeFirebase(options?: FirebaseOptions): {
+function initializeFirebase(options?: FirebaseOptions): {
   app: FirebaseApp;
   auth: Auth;
   db: Firestore;
@@ -87,6 +87,7 @@ export {
   // Firebase App
   auth,
   db,
+  initializeFirebase,
 
   // Auth
   signInWithGoogle,
