@@ -1,54 +1,30 @@
 
-import {
-  initializeApp,
-  getApp,
-  getApps,
-  type FirebaseApp,
-} from 'firebase/app';
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithPopup,
-  GoogleAuthProvider,
-  type User,
-  type Auth,
-} from 'firebase/auth';
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  type Firestore,
-} from 'firebase/firestore';
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { firebaseConfig } from './config';
-import {
-  FirebaseProvider,
-  useFirebaseApp,
-  useAuth,
-  useFirestore,
-} from './provider';
-import { FirebaseClientProvider } from './client-provider';
-import { useUser } from './auth/use-user';
 import { type UserProfile } from './types';
 
 // ---
 // Initialization
 // ---
 
+// Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-const googleProvider = new GoogleAuthProvider();
 
 // ---
 // Auth
 // ---
 
+const googleProvider = new GoogleAuthProvider();
+
 const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 
 const signOut = () => auth.signOut();
+
 
 // ---
 // Firestore
@@ -66,33 +42,20 @@ async function createUserProfile(userId: string, data: Omit<UserProfile, 'psyCoi
   return await setDoc(doc(db, 'users', userId), data);
 }
 
+
 // ---
 // Exports
 // ---
 
-export {
-  // Firebase App
-  app,
-  auth,
-  db,
-  initializeApp,
-
-  // Auth
-  signInWithGoogle,
-  signOut,
-  onAuthStateChanged,
-  useUser,
-  type User,
-  
-  // Firestore
-  getUserProfile,
-  createUserProfile,
-  type UserProfile,
-
-  // Providers & Hooks
-  FirebaseProvider,
-  FirebaseClientProvider,
-  useFirebaseApp,
-  useAuth,
-  useFirestore,
-};
+export { app, auth, db };
+export { signInWithGoogle, signOut, getUserProfile, createUserProfile };
+export { useUser } from './auth/use-user';
+export { 
+    FirebaseProvider, 
+    useAuth, 
+    useFirebaseApp, 
+    useFirestore 
+} from './provider';
+export { FirebaseClientProvider } from './client-provider';
+export type { UserProfile };
+export type { User } from 'firebase/auth';
