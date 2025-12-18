@@ -9,6 +9,7 @@ import { FinancialPlanner } from '@/components/home/financial-planner';
 import { Support } from '@/components/home/support';
 import { CookieBanner } from '@/components/layout/cookie-banner';
 import { WelcomeSplash } from '@/components/home/welcome-splash';
+import { TransactionTracker } from '@/components/home/transaction-tracker';
 
 export default function Home() {
   const [showMainContent, setShowMainContent] = useState(false);
@@ -26,6 +27,9 @@ export default function Home() {
           <main className="flex-grow">
             <Hero />
             <div className="container mx-auto px-4 py-12 md:py-16 space-y-20 md:space-y-28">
+              <section id="tracker" className="scroll-mt-20">
+                <TransactionTracker />
+              </section>
               <section id="calculator" className="scroll-mt-20">
                 <SavingsCalculator />
               </section>

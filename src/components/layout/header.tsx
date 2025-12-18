@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export function Header() {
   const navLinks = [
+    { href: '/#tracker', label: 'Tracker' },
     { href: '/#calculator', label: 'Calculator' },
     { href: '/#planner', label: 'AI Planner' },
     { href: '/#consultancy', label: 'Services' },
