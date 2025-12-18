@@ -2,15 +2,15 @@
   "placeholderImages": [
     {
       "id": "hero-image",
-      "description": "A diverse group of people smiling and looking empowered.",
-      "imageUrl": "https://images.unsplash.com/photo-1760883344496-8b338d8070c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjBlbXBvd2VybWVudHxlbnwwfHx8fDE3NjU5ODU3Njl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "community empowerment"
+      "description": "A diverse group of students collaborating and looking confident.",
+      "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdHVkZW50cyUyMGZpbmFuY2V8ZW58MHx8fHwxNzE2NDEyMTEyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students finance"
     },
     {
       "id": "splash-background",
-      "description": "A beautiful, serene image of hands holding a small plant, symbolizing growth and protection.",
-      "imageUrl": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMHByb3RlY3Rpb258ZW58MHx8fHwxNzE2NDEyMTEyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "security protection"
+      "description": "A clean, modern desk with a laptop, notebook, and a plant, suggesting planning and growth.",
+      "imageUrl": "https://images.unsplash.com/photo-1497032628192-86f99d720c9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFubmluZyUyMGRlc2t8ZW58MHx8fHwxNzE2NDEyMTEyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "planning desk"
     }
   ]
 }

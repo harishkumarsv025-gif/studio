@@ -1,0 +1,99 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Briefcase, CheckCircle, Star } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+
+const plans = [
+  {
+    name: 'Starter Plan',
+    price: 'Free',
+    description: 'Get started with our AI financial planner and basic tools.',
+    features: [
+      'AI-Powered Financial Plan',
+      'Savings Goal Calculator',
+      'Community Forum Access',
+    ],
+    isPopular: false,
+  },
+  {
+    name: 'Pro Student',
+    price: '₹499',
+    pricePeriod: '/one-time',
+    description: 'Unlock one-on-one consultancy and advanced planning.',
+    features: [
+      'Everything in Starter',
+      '1-on-1 Session with an Advisor',
+      'Personalized Budget Review',
+      'Investment Guidance for Beginners',
+    ],
+    isPopular: true,
+  },
+  {
+    name: 'Graduate Plan',
+    price: '₹999',
+    pricePeriod: '/one-time',
+    description: 'Comprehensive planning for post-graduation life.',
+    features: [
+      'Everything in Pro Student',
+      'Career-focused Financial Strategy',
+      'Loan Repayment Planning',
+      'Long-term Investment Plan',
+    ],
+    isPopular: false,
+  },
+];
+
+export function Consultancy() {
+  return (
+    <div className="max-w-5xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold font-headline">Consultancy Services</h2>
+        <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+          Choose a plan that fits your needs and get expert guidance to secure your financial future.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {plans.map((plan) => (
+          <Card key={plan.name} className={`flex flex-col shadow-lg ${plan.isPopular ? 'border-primary border-2' : ''}`}>
+            {plan.isPopular && (
+              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <Star className="mr-2 h-4 w-4" />
+                Most Popular
+              </Badge>
+            )}
+            <CardHeader>
+              <CardTitle>{plan.name}</CardTitle>
+              <CardDescription>{plan.description}</CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow space-y-6">
+              <div className="text-3xl font-bold">
+                {plan.price}
+                {plan.pricePeriod && <span className="text-sm font-normal text-muted-foreground">{plan.pricePeriod}</span>}
+              </div>
+              <ul className="space-y-2">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 shrink-0" />
+                    <span className="text-muted-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full" variant={plan.isPopular ? 'default' : 'outline'}>
+                Get Started
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}

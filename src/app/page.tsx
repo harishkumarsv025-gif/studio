@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { Header } from '@/components/layout/header';
 import { Hero } from '@/components/home/hero';
-import { InsuranceCalculator } from '@/components/home/insurance-calculator';
-import { InsurerComparison } from '@/components/home/provider-comparison';
-import { PolicyAdvisor } from '@/components/home/personalized-recommendations';
+import { SavingsCalculator } from '@/components/home/savings-calculator';
+import { Consultancy } from '@/components/home/consultancy-services';
+import { FinancialPlanner } from '@/components/home/financial-planner';
 import { Support } from '@/components/home/support';
 import { CookieBanner } from '@/components/layout/cookie-banner';
 import { WelcomeSplash } from '@/components/home/welcome-splash';
@@ -27,13 +27,13 @@ export default function Home() {
             <Hero />
             <div className="container mx-auto px-4 py-12 md:py-16 space-y-20 md:space-y-28">
               <section id="calculator" className="scroll-mt-20">
-                <InsuranceCalculator />
+                <SavingsCalculator />
               </section>
-              <section id="advisor" className="scroll-mt-20">
-                <PolicyAdvisor />
+              <section id="planner" className="scroll-mt-20">
+                <FinancialPlanner />
               </section>
-              <section id="compare" className="scroll-mt-20">
-                <InsurerComparison />
+              <section id="consultancy" className="scroll-mt-20">
+                <Consultancy />
               </section>
               <section id="support" className="scroll-mt-20">
                 <Support />

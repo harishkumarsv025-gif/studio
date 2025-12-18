@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Cookie } from 'lucide-react';
 
-const COOKIE_CONSENT_KEY = 'easycredit_cookie_consent';
+const COOKIE_CONSENT_KEY = 'finstudent_cookie_consent';
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +30,7 @@ export function CookieBanner() {
       <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-2 text-sm">
           <Cookie className="h-5 w-5 text-primary shrink-0" />
-          <p>We use cookies to ensure you get the best financial advice.</p>
+          <p>We use cookies to enhance your financial planning experience.</p>
         </div>
         <Button onClick={acceptCookies} className="bg-primary hover:bg-primary/90 text-primary-foreground shrink-0">
           Accept
