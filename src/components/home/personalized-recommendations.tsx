@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Sparkles, Wand2 } from 'lucide-react';
-import { type PersonalizedInsuranceRecommendationsOutput } from '@/ai/flows/personalized-insurance-recommendations';
+import { type PersonalizedLoanRecommendationsOutput } from '@/ai/flows/personalized-loan-recommendations';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '../ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
@@ -35,15 +35,15 @@ import Link from 'next/link';
 const formSchema = z.object({
   householdSize: z.coerce.number().min(1, 'Household must have at least 1 member.'),
   monthlyIncome: z.coerce.number().min(0, 'Income must be a positive number.'),
-  assetsValue: z.coerce.number().min(0, 'Assets value must be a positive number.'),
-  coverageType: z.string().min(1, 'Please select a coverage type.'),
+  loanAmount: z.coerce.number().min(1000, 'Loan amount must be at least ₹1,000.'),
+  loanPurpose: z.string().min(1, 'Please select a loan purpose.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 export function PolicyAdvisor() {
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<PersonalizedInsuranceRecommendationsOutput | null>(null);
+  const [result, setResult] = useState<PersonalizedLoanRecommendationsOutput | null>(null);
   const { toast } = useToast();
 
   const form = useForm<FormData>({
@@ -51,8 +51,8 @@ export function PolicyAdvisor() {
     defaultValues: {
       householdSize: 4,
       monthlyIncome: 15000,
-      assetsValue: 50000,
-      coverageType: 'Health',
+      loanAmount: 50000,
+      loanPurpose: 'Business',
     },
   });
 
@@ -78,10 +78,10 @@ export function PolicyAdvisor() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl">
           <Wand2 className="h-6 w-6 text-primary" />
-          AI-Powered Policy Advisor
+          AI-Powered Loan Advisor
         </CardTitle>
         <CardDescription>
-          Fill in your details to receive personalized insurance recommendations from our AI.
+          Fill in your details to receive personalized loan recommendations from our AI.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -116,10 +116,10 @@ export function PolicyAdvisor() {
               />
               <FormField
                 control={form.control}
-                name="assetsValue"
+                name="loanAmount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Assets Value (INR)</FormLabel>
+                    <FormLabel>Loan Amount (INR)</FormLabel>
                     <FormControl>
                       <Input type="number" placeholder="e.g., 50000" {...field} />
                     </FormControl>
@@ -129,21 +129,22 @@ export function PolicyAdvisor() {
               />
               <FormField
                 control={form.control}
-                name="coverageType"
+                name="loanPurpose"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Desired Coverage</FormLabel>
+                    <FormLabel>Loan Purpose</FormLabel>
                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select coverage type" />
+                            <SelectValue placeholder="Select loan purpose" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Health">Health</SelectItem>
-                          <SelectItem value="Crop">Crop</SelectItem>
-                          <SelectItem value="Livestock">Livestock</SelectItem>
-                          <SelectItem value="Property">Property</SelectItem>
+                          <SelectItem value="Business">Business</SelectItem>
+                          <SelectItem value="Education">Education</SelectItem>
+                          <SelectItem value="Emergency">Emergency</SelectItem>
+                          <SelectItem value="Home Improvement">Home Improvement</SelectItem>
+                          <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     <FormMessage />
@@ -166,7 +167,7 @@ export function PolicyAdvisor() {
 
         {loading && (
           <div className="mt-8 text-center text-muted-foreground">
-            <p>Our AI is analyzing your profile to find the best policies for you...</p>
+            <p>Our AI is analyzing your profile to find the best loans for you...</p>
           </div>
         )}
 
@@ -178,20 +179,20 @@ export function PolicyAdvisor() {
                 {result.recommendations.map((rec, index) => (
                   <Card key={index} className="flex flex-col">
                     <CardHeader>
-                      <CardTitle className="text-lg">{rec.policyName}</CardTitle>
+                      <CardTitle className="text-lg">{rec.productName}</CardTitle>
                       <CardDescription>{rec.provider}</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-3">
                       <div className="flex justify-between items-baseline">
-                        <span className="text-muted-foreground">Monthly Premium</span>
-                        <span className="font-bold text-primary">₹{rec.monthlyPremium}</span>
+                        <span className="text-muted-foreground">Interest Rate</span>
+                        <span className="font-bold text-primary">{rec.interestRate}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Deductible</span>
-                        <span className="font-semibold">{rec.deductible}</span>
+                        <span className="text-muted-foreground">Tenure</span>
+                        <span className="font-semibold">{rec.tenure}</span>
                       </div>
                        <p className="text-sm pt-2">
-                        <span className='font-semibold'>Coverage: </span>{rec.coverageDetails}
+                        <span className='font-semibold'>Details: </span>{rec.loanDetails}
                       </p>
                       <Badge variant="secondary">
                         Suitability: {rec.suitabilityScore}/10
@@ -202,7 +203,7 @@ export function PolicyAdvisor() {
                     </CardContent>
                      <CardFooter>
                         <Button asChild className="w-full mt-4 bg-primary hover:bg-primary/90">
-                            <Link href={`/apply?insurer=${encodeURIComponent(rec.provider)}&policy=${encodeURIComponent(rec.policyName)}`}>
+                            <Link href={`/apply?lender=${encodeURIComponent(rec.provider)}&product=${encodeURIComponent(rec.productName)}`}>
                                 Apply Now
                             </Link>
                         </Button>

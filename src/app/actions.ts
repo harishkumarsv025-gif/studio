@@ -1,16 +1,16 @@
 'use server';
 
 import { 
-  getPersonalizedInsuranceRecommendations,
-  type PersonalizedInsuranceRecommendationsInput,
-  type PersonalizedInsuranceRecommendationsOutput
-} from '@/ai/flows/personalized-insurance-recommendations';
+  getPersonalizedLoanRecommendations,
+  type PersonalizedLoanRecommendationsInput,
+  type PersonalizedLoanRecommendationsOutput
+} from '@/ai/flows/personalized-loan-recommendations';
 
 export async function getRecommendations(
-  input: PersonalizedInsuranceRecommendationsInput
-): Promise<{ data: PersonalizedInsuranceRecommendationsOutput | null; error: string | null }> {
+  input: PersonalizedLoanRecommendationsInput
+): Promise<{ data: PersonalizedLoanRecommendationsOutput | null; error: string | null }> {
   try {
-    const output = await getPersonalizedInsuranceRecommendations(input);
+    const output = await getPersonalizedLoanRecommendations(input);
     if (!output) {
       return { data: null, error: 'Failed to get recommendations. The AI returned no output.' };
     }

@@ -19,30 +19,30 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
-const insurers = [
+const lenders = [
   {
-    name: 'LIC',
-    logo: 'https://placehold.co/100x40/f8f8f8/000000?text=LIC',
-    policy: 'Aam Aadmi Bima Yojana',
-    premium: '₹100 / year',
-    coverage: 'Natural/Accidental death & disability',
-    bestFor: 'Life & Accident',
+    name: 'State Bank of India',
+    logo: 'https://placehold.co/100x40/004d98/ffffff?text=SBI',
+    product: 'Mudra Loan',
+    interestRate: '9.75% p.a. onwards',
+    maxAmount: 'Up to ₹10 Lakh',
+    bestFor: 'Small Business',
   },
   {
-    name: 'HDFC Ergo',
-    logo: 'https://placehold.co/100x40/ffffff/c40000?text=HDFC+Ergo',
-    policy: 'Crop Insurance (PMFBY)',
-    premium: 'As per crop & season',
-    coverage: 'Crop yield loss due to non-preventable risks',
-    bestFor: 'Agriculture',
+    name: 'HDFC Bank',
+    logo: 'https://placehold.co/100x40/ffffff/c40000?text=HDFC+Bank',
+    product: 'Personal Loan',
+    interestRate: '10.50% p.a. onwards',
+    maxAmount: 'Up to ₹40 Lakh',
+    bestFor: 'Personal Needs',
   },
   {
-    name: 'ICICI Lombard',
-    logo: 'https://placehold.co/100x40/ffffff/004d98?text=ICICI+Lombard',
-    policy: 'Health Advantage Plus',
-    premium: '₹200 / month',
-    coverage: 'Hospitalization expenses',
-    bestFor: 'Health',
+    name: 'Bajaj Finserv',
+    logo: 'https://placehold.co/100x40/007bff/ffffff?text=Bajaj+Finserv',
+    product: 'Flexi Personal Loan',
+    interestRate: '12.99% p.a. onwards',
+    maxAmount: 'Up to ₹25 Lakh',
+    bestFor: 'Flexible Use',
   },
 ];
 
@@ -52,10 +52,10 @@ export function InsurerComparison() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-headline text-2xl">
           <Scale className="h-6 w-6 text-primary" />
-          Compare & Apply for Insurance
+          Compare & Apply for a Loan
         </CardTitle>
         <CardDescription>
-          Find the right policy and apply directly through our platform.
+          Find the right loan product and apply directly through our platform.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -64,21 +64,21 @@ export function InsurerComparison() {
             <TableHeader>
               <TableRow>
                 <TableHead className="font-semibold">Provider</TableHead>
-                <TableHead className="font-semibold">Policy Name</TableHead>
-                <TableHead className="font-semibold text-center">Typical Premium</TableHead>
-                <TableHead className="font-semibold">Key Coverage</TableHead>
+                <TableHead className="font-semibold">Product Name</TableHead>
+                <TableHead className="font-semibold text-center">Interest Rate</TableHead>
+                <TableHead className="font-semibold">Max Amount</TableHead>
                 <TableHead className="font-semibold text-center">Best For</TableHead>
                 <TableHead className="font-semibold text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {insurers.map((insurer) => (
-                <TableRow key={insurer.name}>
+              {lenders.map((lender) => (
+                <TableRow key={lender.name}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={insurer.logo}
-                        alt={`${insurer.name} logo`}
+                        src={lender.logo}
+                        alt={`${lender.name} logo`}
                         width={80}
                         height={32}
                         className="object-contain"
@@ -86,15 +86,15 @@ export function InsurerComparison() {
                       />
                     </div>
                   </TableCell>
-                  <TableCell>{insurer.policy}</TableCell>
-                  <TableCell className="text-center">{insurer.premium}</TableCell>
-                  <TableCell>{insurer.coverage}</TableCell>
+                  <TableCell>{lender.product}</TableCell>
+                  <TableCell className="text-center">{lender.interestRate}</TableCell>
+                  <TableCell>{lender.maxAmount}</TableCell>
                   <TableCell className="text-center">
-                    <Badge variant="secondary">{insurer.bestFor}</Badge>
+                    <Badge variant="secondary">{lender.bestFor}</Badge>
                   </TableCell>
                   <TableCell className="text-right">
                     <Button asChild size="sm" className='bg-primary hover:bg-primary/90'>
-                      <Link href={`/apply?insurer=${encodeURIComponent(insurer.name)}&policy=${encodeURIComponent(insurer.policy)}`}>
+                      <Link href={`/apply?lender=${encodeURIComponent(lender.name)}&product=${encodeURIComponent(lender.product)}`}>
                         Apply Now
                       </Link>
                     </Button>

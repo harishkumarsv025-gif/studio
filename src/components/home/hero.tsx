@@ -23,17 +23,17 @@ export function Hero() {
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 max-w-4xl mx-auto px-4">
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-white drop-shadow-lg">
-          Affordable Insurance for Everyone
+          Affordable Credit for Everyone
         </h1>
         <p className="mt-4 text-lg md:text-xl text-slate-200 drop-shadow-md">
-          Protect your family and assets with tailored micro-insurance plans.
+          Access the funds you need with transparent, tailored micro-loan plans.
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Link href="#advisor">Get AI Advice</Link>
           </Button>
           <Button asChild size="lg" variant="secondary">
-            <Link href="#calculator">Estimate Premium</Link>
+            <Link href="#calculator">Estimate EMI</Link>
           </Button>
         </div>
       </div>

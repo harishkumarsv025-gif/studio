@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'MicroInsurance Ally',
-  description: 'Affordable Insurance for Everyone. Empowering Low Income Households.',
+  title: 'EasyCredit',
+  description: 'Affordable Credit for Everyone. Empowering Low Income Households.',
 };
 
 export default function RootLayout({

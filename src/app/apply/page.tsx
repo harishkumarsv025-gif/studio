@@ -28,16 +28,16 @@ const applicationSchema = z.object({
   phone: z.string().min(10, 'A valid 10-digit phone number is required'),
   email: z.string().email('A valid email is required'),
   address: z.string().min(10, 'Full address is required'),
-  policyName: z.string(),
-  insurerName: z.string(),
+  productName: z.string(),
+  lenderName: z.string(),
 });
 
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
 
 function ApplicationForm() {
   const searchParams = useSearchParams();
-  const insurer = searchParams.get('insurer') || 'Selected Insurer';
-  const policy = searchParams.get('policy') || 'Selected Policy';
+  const lender = searchParams.get('lender') || 'Selected Lender';
+  const product = searchParams.get('product') || 'Selected Product';
 
   const { toast } = useToast();
   const {
@@ -48,8 +48,8 @@ function ApplicationForm() {
   } = useForm<ApplicationFormValues>({
     resolver: zodResolver(applicationSchema),
     defaultValues: {
-      insurerName: insurer,
-      policyName: policy,
+      lenderName: lender,
+      productName: product,
     },
   });
 
@@ -71,10 +71,10 @@ function ApplicationForm() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-headline text-2xl">
               <FileText className="h-6 w-6 text-primary" />
-              Apply for Insurance
+              Apply for a Loan
             </CardTitle>
             <CardDescription>
-              Applying for: <strong>{policy}</strong> with <strong>{insurer}</strong>.
+              Applying for: <strong>{product}</strong> with <strong>{lender}</strong>.
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -101,8 +101,8 @@ function ApplicationForm() {
                 <Textarea id="address" {...register('address')} />
                 {errors.address && <p className="text-sm text-destructive">{errors.address.message}</p>}
               </div>
-              <input type="hidden" {...register('insurerName')} />
-              <input type="hidden" {...register('policyName')} />
+              <input type="hidden" {...register('lenderName')} />
+              <input type="hidden" {...register('productName')} />
               <Alert>
                 <AlertCircle className="h-4 w-4" />
                 <AlertTitle>Service Fee</AlertTitle>
