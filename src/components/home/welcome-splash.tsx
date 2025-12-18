@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import placeholderData from '@/lib/placeholder-images.json';
-import { GraduationCap } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 
-const SPLASH_SEEN_KEY = 'finstudent_splash_seen';
+const SPLASH_SEEN_KEY = 'psycemoney_splash_seen';
 
 const splashImage = placeholderData.placeholderImages.find(
   (img) => img.id === 'splash-background'
@@ -46,17 +46,17 @@ export function WelcomeSplash({ onEnter }: { onEnter: () => void }) {
           priority
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
       <div className="relative z-10 flex flex-col items-center justify-center text-center text-white p-4">
-        <GraduationCap className="h-16 w-16 text-white drop-shadow-lg mx-auto mb-4" />
-        <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-md">
-          Welcome to FinStudent
+        <BrainCircuit className="h-16 w-16 text-primary drop-shadow-lg mx-auto mb-4" />
+        <h1 className="text-5xl md:text-7xl font-headline font-bold drop-shadow-md">
+          PSYCEMONEY
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-slate-200 max-w-2xl mx-auto drop-shadow-sm">
-          Your personal guide to mastering student finances and building a secure future.
+        <p className="mt-2 text-lg md:text-xl text-slate-100 max-w-2xl mx-auto drop-shadow-sm tracking-wide">
+          Rewiring Wealth Thinking
         </p>
         <Button onClick={handleEnter} size="lg" className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg">
-          Start Planning
+          Get Started
         </Button>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Cookie } from 'lucide-react';
 
-const COOKIE_CONSENT_KEY = 'finstudent_cookie_consent';
+const COOKIE_CONSENT_KEY = 'psycemoney_cookie_consent';
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);

@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'FinStudent',
-  description: 'Smart Personal Financial Management for Students.',
+  title: 'PSYCEMONEY',
+  description: 'Rewiring Wealth Thinking. Smart Personal Financial Management for Students.',
 };
 
 export default function RootLayout({
