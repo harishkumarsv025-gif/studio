@@ -7,6 +7,7 @@ export function Header() {
     { href: '/#tracker', label: 'Tracker' },
     { href: '/#calculator', label: 'Calculator' },
     { href: '/#planner', label: 'AI Planner' },
+    { href: '/#ratios', label: 'Ratios' },
     { href: '/#consultancy', label: 'Services' },
     { href: '/#support', label: 'Support' },
   ];
