@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { signInWithGoogle, useUser, getUserProfile, createUserProfile } from '@/firebase';
+import { signInWithGoogle, getUserProfile } from '@/firebase';
 import { CompleteProfileDialog } from './complete-profile-dialog';
 import { User } from 'firebase/auth';
 
