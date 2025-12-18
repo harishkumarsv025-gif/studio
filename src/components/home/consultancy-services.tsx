@@ -42,7 +42,7 @@ const plans = [
   {
     name: 'Graduate Plan',
     price: '₹999',
-    pricePeriod: '/one-time',
+    pricePeriod: '/three months',
     description: 'Comprehensive planning for post-graduation life.',
     features: [
       'Everything in Pro Student',
