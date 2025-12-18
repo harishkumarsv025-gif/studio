@@ -47,42 +47,6 @@ export function Header() {
           </Sheet>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-            <nav className="hidden md:flex md:items-center md:gap-4 lg:gap-6 text-sm">
-                {navLinks.map((link) => (
-                    <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-foreground/60 transition-colors hover:text-foreground/80"
-                    >
-                    {link.label}
-                    </Link>
-                ))}
-            </nav>
-             <Sheet>
-                <SheetTrigger asChild>
-                    <Button variant="ghost" className="md:hidden">
-                        <Menu className="h-5 w-5" />
-                        <span className="sr-only">Toggle Menu</span>
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                    <Link href="/" className="mr-6 flex items-center space-x-2">
-                        <BrainCircuit className="h-6 w-6 text-primary" />
-                        <span className="font-bold font-headline">PSYCEMONEY</span>
-                    </Link>
-                    <div className="flex flex-col space-y-3 mt-4">
-                        {navLinks.map((link) => (
-                            <Link
-                            key={link.href}
-                            href={link.href}
-                            className="text-foreground/60 transition-colors hover:text-foreground/80"
-                            >
-                            {link.label}
-                            </Link>
-                        ))}
-                    </div>
-                </SheetContent>
-            </Sheet>
         </div>
       </div>
     </header>
