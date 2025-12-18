@@ -18,8 +18,9 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ShieldCheck, ShieldAlert, LineChart } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, LineChart, TrendingUp, TrendingDown, AlertCircle, CheckCircle } from 'lucide-react';
 import { Separator } from '../ui/separator';
+import { Progress } from '../ui/progress';
 
 const mockTransactions = [
   {
@@ -59,6 +60,37 @@ const mockTransactions = [
   },
 ];
 
+const HealthStatus = ({ score }: { score: number }) => {
+    let status = '';
+    let Icon = AlertCircle;
+    let color = 'text-red-500';
+
+    if (score >= 75) {
+        status = 'Good';
+        Icon = TrendingUp;
+        color = 'text-green-500';
+    } else if (score >= 50) {
+        status = 'Better';
+        Icon = CheckCircle;
+        color = 'text-blue-500';
+    } else if (score >= 25) {
+        status = 'Could be Better';
+        Icon = TrendingDown;
+        color = 'text-yellow-500';
+    } else {
+        status = 'Needs Attention';
+        Icon = AlertCircle;
+        color = 'text-red-500';
+    }
+
+    return (
+        <div className={`flex flex-col items-center justify-center text-center ${color}`}>
+            <Icon className="h-10 w-10 mb-2" />
+            <span className="font-bold text-lg">{status}</span>
+        </div>
+    );
+};
+
 export function TransactionTracker() {
   const totalIncome = mockTransactions
     .filter((t) => t.amount > 0)
@@ -67,6 +99,14 @@ export function TransactionTracker() {
   const totalExpenses = mockTransactions
     .filter((t) => t.amount < 0)
     .reduce((acc, t) => acc + t.amount, 0);
+
+  const netBalance = totalIncome + totalExpenses;
+
+  // Calculate health score. Let's define it based on savings rate.
+  // A savings rate of 50% or more is 100. Below 0% is 0.
+  const savingsRate = totalIncome > 0 ? (netBalance / totalIncome) * 100 : 0;
+  const healthScore = Math.max(0, Math.min(100, savingsRate * 2));
+
 
   return (
     <Card className="shadow-lg">
@@ -80,6 +120,37 @@ export function TransactionTracker() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <Card className="mb-6 bg-muted/50">
+            <CardHeader>
+                <CardTitle className="text-xl text-center font-headline">Your Financial Health Score</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col md:flex-row items-center justify-around gap-6">
+                 <div className="relative h-40 w-40">
+                    <svg className="h-full w-full" viewBox="0 0 36 36">
+                        <path
+                        className="text-border"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.p155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        />
+                        <path
+                        className="text-primary"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeDasharray={`${healthScore}, 100`}
+                        strokeLinecap="round"
+                        />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-primary">{Math.round(healthScore)}</span>
+                    </div>
+                </div>
+                <HealthStatus score={healthScore} />
+            </CardContent>
+        </Card>
         <Table>
           <TableHeader>
             <TableRow>
