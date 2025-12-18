@@ -4,4 +4,5 @@ export type UserProfile = {
     email: string;
     phoneNumber?: string;
     jobStatus: 'student' | 'employed' | 'unemployed' | 'other';
+    psyCoins: number;
 };

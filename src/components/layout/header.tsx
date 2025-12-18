@@ -3,6 +3,7 @@ import { BrainCircuit, LifeBuoy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { AuthButton } from '@/components/auth/auth-button';
+import { PsyCoin } from '../auth/psy-coin';
 
 export const navLinks = [
     { href: '/#tracker', label: 'Tracker' },
@@ -48,6 +49,7 @@ export function Header() {
           </Sheet>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-2">
+            <PsyCoin />
             <Button variant="ghost" size="icon" asChild>
                 <Link href="/#support">
                     <LifeBuoy className="h-5 w-5" />

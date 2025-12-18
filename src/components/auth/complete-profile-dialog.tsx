@@ -66,7 +66,12 @@ export function CompleteProfileDialog({
   async function onSubmit(values: ProfileFormData) {
     setLoading(true);
     try {
-      await createUserProfile(user.uid, values);
+      // Add initial psyCoins to the profile data
+      const profileData = {
+        ...values,
+        psyCoins: 0,
+      };
+      await createUserProfile(user.uid, profileData);
       toast({
         title: 'Profile Created!',
         description: "Welcome to PSYCEMONEY! We're glad to have you.",

@@ -23,9 +23,13 @@
           "type": "string",
           "enum": ["student", "employed", "unemployed", "other"],
           "description": "The user's current employment status."
+        },
+        "psyCoins": {
+            "type": "number",
+            "description": "The user's rewards points balance."
         }
       },
-      "required": ["displayName", "email", "jobStatus"]
+      "required": ["displayName", "email", "jobStatus", "psyCoins"]
     }
   },
   "auth": {
