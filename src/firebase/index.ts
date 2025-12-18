@@ -1,11 +1,8 @@
 
-'use client';
-
 import {
   initializeApp,
   getApp,
   getApps,
-  type FirebaseOptions,
   type FirebaseApp,
 } from 'firebase/app';
 import {
@@ -39,20 +36,10 @@ import { type UserProfile } from './types';
 // Initialization
 // ---
 
-function initializeFirebase(options?: FirebaseOptions): {
-  app: FirebaseApp;
-  auth: Auth;
-  db: Firestore;
-} {
-  const app = !getApps().length
-    ? initializeApp(options || firebaseConfig)
-    : getApp();
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  return { app, auth, db };
-}
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const { auth, db } = initializeFirebase();
 const googleProvider = new GoogleAuthProvider();
 
 // ---
@@ -75,7 +62,7 @@ async function getUserProfile(userId: string): Promise<UserProfile | null> {
   return null;
 }
 
-async function createUserProfile(userId: string, data: UserProfile) {
+async function createUserProfile(userId: string, data: Omit<UserProfile, 'psyCoins'> & { psyCoins: number }) {
   return await setDoc(doc(db, 'users', userId), data);
 }
 
@@ -85,9 +72,10 @@ async function createUserProfile(userId: string, data: UserProfile) {
 
 export {
   // Firebase App
+  app,
   auth,
   db,
-  initializeFirebase,
+  initializeApp,
 
   // Auth
   signInWithGoogle,
