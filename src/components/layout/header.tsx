@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { BrainCircuit, Menu } from 'lucide-react';
+import { BrainCircuit, LifeBuoy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { AuthButton } from '@/components/auth/auth-button';
 
 export const navLinks = [
     { href: '/#tracker', label: 'Tracker' },
@@ -46,7 +47,14 @@ export function Header() {
             </SheetContent>
           </Sheet>
         </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+        <div className="flex flex-1 items-center justify-end space-x-2">
+            <Button variant="ghost" size="icon" asChild>
+                <Link href="/#support">
+                    <LifeBuoy className="h-5 w-5" />
+                    <span className="sr-only">Support</span>
+                </Link>
+            </Button>
+            <AuthButton />
         </div>
       </div>
     </header>

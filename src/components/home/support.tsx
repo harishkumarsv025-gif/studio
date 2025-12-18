@@ -1,7 +1,12 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { LifeBuoy, MessageSquare } from 'lucide-react';
+import { AuthDialog } from '@/components/auth/auth-dialog';
+import { useUser } from '@/firebase';
 
 export function Support() {
+    const { user, loading } = useUser();
   return (
     <div className="bg-card p-8 rounded-lg shadow-lg border border-accent/50 text-center max-w-3xl mx-auto">
       <h3 className="text-2xl font-semibold font-headline text-primary">Need Help?</h3>
@@ -9,9 +14,18 @@ export function Support() {
         Our support team is here to help you with any questions about financial planning.
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <Button size="lg" className="bg-primary hover:bg-primary/90">
-          <MessageSquare className="mr-2 h-4 w-4" /> Chat with an Advisor
-        </Button>
+        {user ? (
+             <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <MessageSquare className="mr-2 h-4 w-4" /> Chat with an Advisor
+            </Button>
+        ) : (
+            <AuthDialog>
+                 <Button size="lg" className="bg-primary hover:bg-primary/90">
+                    <MessageSquare className="mr-2 h-4 w-4" /> Chat with an Advisor
+                </Button>
+            </AuthDialog>
+        )}
+       
         <Button size="lg" variant="outline">
           <LifeBuoy className="mr-2 h-4 w-4" /> Visit Help Center
         </Button>
