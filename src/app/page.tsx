@@ -11,6 +11,7 @@ import { CookieBanner } from '@/components/layout/cookie-banner';
 import { WelcomeSplash } from '@/components/home/welcome-splash';
 import { TransactionTracker } from '@/components/home/transaction-tracker';
 import { FinancialRatios } from '@/components/home/financial-ratios';
+import { PricingPlans } from '@/components/home/pricing-plans';
 
 export default function Home() {
   const [showMainContent, setShowMainContent] = useState(false);
@@ -42,6 +43,7 @@ export default function Home() {
               </section>
               <section id="consultancy" className="scroll-mt-20">
                 <Consultancy />
+                <PricingPlans />
               </section>
               <section id="support" className="scroll-mt-20">
                 <Support />
