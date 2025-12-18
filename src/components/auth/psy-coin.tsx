@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@/firebase';
+import { useUser } from '@/firebase/auth/use-user';
 import { Badge } from '@/components/ui/badge';
 import { Coins } from 'lucide-react';
 

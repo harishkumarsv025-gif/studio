@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { LifeBuoy, MessageSquare } from 'lucide-react';
 import { AuthDialog } from '@/components/auth/auth-dialog';
-import { useUser } from '@/firebase';
+import { useUser } from '@/firebase/auth/use-user';
 
 export function Support() {
     const { user, loading } = useUser();

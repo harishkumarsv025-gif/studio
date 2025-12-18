@@ -38,7 +38,7 @@ async function getUserProfile(userId: string): Promise<UserProfile | null> {
   return null;
 }
 
-async function createUserProfile(userId: string, data: Omit<UserProfile, 'psyCoins'> & { psyCoins: number }) {
+async function createUserProfile(userId: string, data: UserProfile) {
   return await setDoc(doc(db, 'users', userId), data);
 }
 
@@ -49,13 +49,7 @@ async function createUserProfile(userId: string, data: Omit<UserProfile, 'psyCoi
 
 export { app, auth, db };
 export { signInWithGoogle, signOut, getUserProfile, createUserProfile };
+export { FirebaseProvider, useAuth, useFirestore, useFirebaseApp } from './provider';
 export { useUser } from './auth/use-user';
-export { 
-    FirebaseProvider, 
-    useAuth, 
-    useFirebaseApp, 
-    useFirestore 
-} from './provider';
-export { FirebaseClientProvider } from './client-provider';
 export type { UserProfile };
 export type { User } from 'firebase/auth';

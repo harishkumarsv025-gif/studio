@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { signOut, useUser } from '@/firebase';
+import { signOut } from '@/firebase';
+import { useUser } from '@/firebase/auth/use-user';
 import { LogOut, User as UserIcon } from 'lucide-react';
 
 export function UserButton() {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@/firebase';
+import { useUser } from '@/firebase/auth/use-user';
 import { AuthDialog } from './auth-dialog';
 import { UserButton } from './user-button';
 import { Button } from '../ui/button';

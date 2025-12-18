@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { AuthButton } from '@/components/auth/auth-button';
 import { PsyCoin } from '../auth/psy-coin';
-import { useUser } from '@/firebase';
+import { useUser } from '@/firebase/auth/use-user';
 
 export const navLinks = [
   { href: '/#tracker', label: 'Tracker' },
