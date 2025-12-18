@@ -38,12 +38,10 @@ export function Header() {
               </Link>
               <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
                 <div className="flex flex-col space-y-3">
-                  {user && profile && (
-                     <div className="flex items-center gap-2 text-foreground/80 px-2 py-1 rounded-md bg-muted">
+                    <div className="flex items-center gap-2 text-foreground/80 px-2 py-1 rounded-md bg-muted">
                         <Coins className="h-5 w-5 text-primary" />
-                        <span className="font-semibold">{profile.psyCoins ?? 0} PsyCoins</span>
+                        <span className="font-semibold">{user && profile ? profile.psyCoins : 0} PsyCoins</span>
                     </div>
-                  )}
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
