@@ -6,6 +6,7 @@ import {
   getApp,
   getApps,
   type FirebaseOptions,
+  type FirebaseApp,
 } from 'firebase/app';
 import {
   getAuth,
@@ -13,11 +14,24 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   type User,
+  type Auth,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  type Firestore,
+} from 'firebase/firestore';
 
 import { firebaseConfig } from './config';
-import { FirebaseClientProvider, useFirebase } from './client-provider';
+import {
+  FirebaseProvider,
+  useFirebaseApp,
+  useAuth,
+  useFirestore,
+} from './provider';
+import { FirebaseClientProvider } from './client-provider';
 import { useUser } from './auth/use-user';
 import { type UserProfile } from './types';
 
@@ -25,13 +39,20 @@ import { type UserProfile } from './types';
 // Initialization
 // ---
 
-function initializeFirebase(options: FirebaseOptions) {
-  return !getApps().length ? initializeApp(options) : getApp();
+function initializeFirebase(options?: FirebaseOptions): {
+  app: FirebaseApp;
+  auth: Auth;
+  db: Firestore;
+} {
+  const firebaseApp = !getApps().length
+    ? initializeApp(options || firebaseConfig)
+    : getApp();
+  const auth = getAuth(firebaseApp);
+  const db = getFirestore(firebaseApp);
+  return { app: firebaseApp, auth, db };
 }
 
-const app = initializeFirebase(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const { app, auth, db } = initializeFirebase();
 const googleProvider = new GoogleAuthProvider();
 
 // ---
@@ -67,6 +88,7 @@ export {
   app,
   auth,
   db,
+  initializeFirebase,
 
   // Auth
   signInWithGoogle,
@@ -80,7 +102,10 @@ export {
   createUserProfile,
   type UserProfile,
 
-  // Providers
+  // Providers & Hooks
+  FirebaseProvider,
   FirebaseClientProvider,
-  useFirebase,
+  useFirebaseApp,
+  useAuth,
+  useFirestore,
 };
