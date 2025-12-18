@@ -11,7 +11,7 @@ import { Badge } from '../ui/badge';
 import { Calculator } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { Card, CardContent, CardHeader } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 const ratios = [
   {
@@ -59,47 +59,31 @@ type CalculatedRatios = {
   icr: number | null;
 };
 
-export function FinancialRatios() {
-  const [monthlyIncome, setMonthlyIncome] = useState(10000);
-  const [monthlySavings, setMonthlySavings] = useState(2000);
-  const [monthlyDebt, setMonthlyDebt] = useState(1000);
-  const [monthlyInterest, setMonthlyInterest] = useState(300);
+type RatioCalculatorProps = {
+    monthlyIncome: number;
+    setMonthlyIncome: (value: number) => void;
+    monthlySavings: number;
+    setMonthlySavings: (value: number) => void;
+    monthlyDebt: number;
+    setMonthlyDebt: (value: number) => void;
+    monthlyInterest: number;
+    setMonthlyInterest: (value: number) => void;
+}
 
-  const calculatedRatios: CalculatedRatios = {
-    savingsRate: monthlyIncome > 0 ? (monthlySavings / monthlyIncome) * 100 : null,
-    dti: monthlyIncome > 0 ? (monthlyDebt / monthlyIncome) * 100 : null,
-    dscr: monthlyDebt > 0 ? monthlyIncome / monthlyDebt : null,
-    icr: monthlyInterest > 0 ? monthlyIncome / monthlyInterest : null,
-  };
-
-  const formatResult = (value: number | null, unit: string = '') => {
-    if (value === null || !isFinite(value)) {
-      return <span className="text-muted-foreground">N/A</span>;
-    }
+function RatioCalculator({
+    monthlyIncome,
+    setMonthlyIncome,
+    monthlySavings,
+    setMonthlySavings,
+    monthlyDebt,
+    setMonthlyDebt,
+    monthlyInterest,
+    setMonthlyInterest,
+}: RatioCalculatorProps) {
     return (
-      <span className="text-primary font-bold">
-        {value.toFixed(2)}
-        {unit}
-      </span>
-    );
-  };
-  
-
-  return (
-    <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold font-headline flex items-center justify-center gap-2">
-          <Calculator className="h-8 w-8 text-primary" />
-          Key Financial Ratios
-        </h2>
-        <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
-          Understand these key metrics to gauge your financial health and make smarter decisions.
-        </p>
-      </div>
-
-      <Card className="mb-8 shadow-md">
+        <Card className="mb-8 shadow-md">
         <CardHeader>
-          <h3 className="text-xl font-semibold font-headline">Your Financial Snapshot</h3>
+          <CardTitle className="text-xl font-semibold font-headline">Your Financial Snapshot</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="space-y-2">
@@ -144,6 +128,57 @@ export function FinancialRatios() {
           </div>
         </CardContent>
       </Card>
+    )
+}
+
+export function FinancialRatios() {
+  const [monthlyIncome, setMonthlyIncome] = useState(10000);
+  const [monthlySavings, setMonthlySavings] = useState(2000);
+  const [monthlyDebt, setMonthlyDebt] = useState(1000);
+  const [monthlyInterest, setMonthlyInterest] = useState(300);
+
+  const calculatedRatios: CalculatedRatios = {
+    savingsRate: monthlyIncome > 0 ? (monthlySavings / monthlyIncome) * 100 : null,
+    dti: monthlyIncome > 0 ? (monthlyDebt / monthlyIncome) * 100 : null,
+    dscr: monthlyDebt > 0 ? monthlyIncome / monthlyDebt : null,
+    icr: monthlyInterest > 0 ? monthlyIncome / monthlyInterest : null,
+  };
+
+  const formatResult = (value: number | null, unit: string = '') => {
+    if (value === null || !isFinite(value)) {
+      return <span className="text-muted-foreground">N/A</span>;
+    }
+    return (
+      <span className="text-primary font-bold">
+        {value.toFixed(2)}
+        {unit}
+      </span>
+    );
+  };
+  
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold font-headline flex items-center justify-center gap-2">
+          <Calculator className="h-8 w-8 text-primary" />
+          Key Financial Ratios
+        </h2>
+        <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+          Understand these key metrics to gauge your financial health and make smarter decisions.
+        </p>
+      </div>
+
+      <RatioCalculator 
+        monthlyIncome={monthlyIncome}
+        setMonthlyIncome={setMonthlyIncome}
+        monthlySavings={monthlySavings}
+        setMonthlySavings={setMonthlySavings}
+        monthlyDebt={monthlyDebt}
+        setMonthlyDebt={setMonthlyDebt}
+        monthlyInterest={monthlyInterest}
+        setMonthlyInterest={setMonthlyInterest}
+      />
 
       <Accordion type="single" collapsible className="w-full">
         {ratios.map((ratio) => (
