@@ -39,20 +39,20 @@ import { type UserProfile } from './types';
 // Initialization
 // ---
 
-function initializeFirebase(options?: FirebaseOptions): {
+export function initializeFirebase(options?: FirebaseOptions): {
   app: FirebaseApp;
   auth: Auth;
   db: Firestore;
 } {
-  const firebaseApp = !getApps().length
+  const app = !getApps().length
     ? initializeApp(options || firebaseConfig)
     : getApp();
-  const auth = getAuth(firebaseApp);
-  const db = getFirestore(firebaseApp);
-  return { app: firebaseApp, auth, db };
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  return { app, auth, db };
 }
 
-const { app, auth, db } = initializeFirebase();
+const { auth, db } = initializeFirebase();
 const googleProvider = new GoogleAuthProvider();
 
 // ---
@@ -85,10 +85,8 @@ async function createUserProfile(userId: string, data: UserProfile) {
 
 export {
   // Firebase App
-  app,
   auth,
   db,
-  initializeFirebase,
 
   // Auth
   signInWithGoogle,
