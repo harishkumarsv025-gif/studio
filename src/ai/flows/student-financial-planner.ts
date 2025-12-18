@@ -19,7 +19,7 @@ const AdviceSchema = z.object({
 const StudentFinancialPlannerOutputSchema = z.object({
     monthlySavingsTarget: z.number().describe('The suggested amount the student should aim to save each month to reach their goal.'),
     progressSummary: z.string().describe('A brief, encouraging summary of how achievable the goal is with the suggested savings plan.'),
-    actionableAdvice: z.array(AdviceSchema).length(3).describe('A list of exactly three diverse, actionable financial tips tailored to the student\'s situation.'),
+    actionableAdvice: z.array(AdviceSchema).length(3).describe('A list of exactly three diverse, actionable tips tailored to the student\'s situation.'),
 });
 export type StudentFinancialPlannerOutput = z.infer<typeof StudentFinancialPlannerOutputSchema>;
 
